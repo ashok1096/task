@@ -13,7 +13,7 @@ def create_task(task: Task):
     next_id = task_collection.count_documents({}) + 1
 
     if next_id > 9:
-        raise HTTPException(status_code=400, detail="Task limit reached. Only single digit IDs (1-9) are allowed.")
+        next_id = (next_id - 1) % 9 + 1
 
     task_data["task_id"] = next_id
 
@@ -21,7 +21,8 @@ def create_task(task: Task):
 
     return {
         "message": "Task created successfully",
-        "task_id": next_id
+        "task_id": next_id,
+        "task_status": task.status
     }
 
 
