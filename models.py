@@ -1,7 +1,9 @@
 from pydantic import BaseModel
 
 class Task(BaseModel):
-    task_description: str
+    title: str
     assigned_person: str
     status: str
+    priority: str
+    completed: bool
 
